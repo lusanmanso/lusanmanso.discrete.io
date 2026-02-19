@@ -1,0 +1,52 @@
+\documentclass[12pt, a4paper]{article}
+
+% 1. CARGAMOS LA CONFIGURACIÓN (COLORES, PAQUETES, ETC.)
+% Esto busca el archivo setup.sty en la misma carpeta
+\usepackage{setup}
+
+% 2. DATOS DEL DOCUMENTO
+\newcommand{\Asignatura}{Matemática Discreta II}
+\newcommand{\Autor}{Lucía Manso}
+\newcommand{\Curso}{2025/2026}
+
+% Configuración de cabeceras (Visualización superior de la página)
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{Tema \thesection\ -- #1}{}}
+% Cabecera Izquierda: Muestra lo que definimos arriba (sin ponerlo todo en mayúsculas)
+\lhead{\small \textbf{\nouppercase{\leftmark}}}
+\rhead{\small \Asignatura}
+\cfoot{\thepage}
+\setlength{\headheight}{14pt}
+\addtolength{\topmargin}{-2pt}
+
+\begin{document}
+\raggedbottom
+
+% --- PORTADA ---
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\Huge \bfseries \textcolor{mainblue}{Grafos}}\\[1cm]
+    {\LARGE \textbf{\Asignatura}}\\[0.5cm]
+    \rule{10cm}{0.5pt}\\[0.5cm]
+    
+    \vspace{2cm}
+    \textbf{Autor:} \Autor \\
+    \textbf{Curso:} \Curso \\
+    \vfill
+\end{titlepage}
+
+% --- ÍNDICE ---
+\tableofcontents
+\newpage
+
+% --- IMPORTACIÓN DE TEMAS ---
+% Aquí es donde "llamas" a los archivos de la carpeta Temas
+% A medida que crees Tema02.tex, Tema03.tex, etc., añades líneas aquí.
+
+\input{temas/tema1}
+
+\input{temas/tema2}
+
+\end{document}

@@ -1,0 +1,166 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{setup}[2025/02/16 Configuración de apuntes]
+
+% --- PAQUETES DE IDIOMA Y CODIFICACIÓN ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% --- PAQUETES MATEMÁTICOS ---
+\usepackage{amsmath, amssymb, amsfonts}
+
+% --- CONFIGURACIÓN DE PÁGINA ---
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage[skip=6pt]{parskip}   % Espaciado entre párrafos (ajustable)
+\usepackage{fancyhdr}  % Encabezados
+\setlength{\headheight}{13.7pt} % evita warning de fancyhdr (cabecera demasiado alta)
+\addtolength{\topmargin}{-1.7pt} % compensa el aumento de headheight
+\usepackage{float}     % Posicionamiento de figuras
+\usepackage[section]{placeins} % Evita grandes huecos por floats (figuras) "retenidos"
+\usepackage[section]{placeins} % Evita grandes huecos por floats (figuras) "retenidos"
+
+% --- PAQUETES GRÁFICOS (TikZ y PGFPlots) ---
+\usepackage{graphicx}
+\usepackage{caption}
+\captionsetup[figure]{labelfont=bf}
+\captionsetup[figure]{labelfont=bf}
+
+% ==========================================
+% CONFIGURACIÓN GRÁFICA (TIKZ) - ACTUALIZADO
+% ==========================================
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subcaption} % Para poner figuras lado a lado (ej: comparaciones)
+\pgfplotsset{compat=1.18}
+
+% Librerías avanzadas para grafos
+\usetikzlibrary{arrows.meta, positioning, calc, shapes, backgrounds, fit}
+
+% Definición de Estilos Globales para Grafos
+\tikzset{
+    % Estilo por defecto para los vértices (nodos)
+    vertex/.style={
+        circle,
+        draw=mainblue,       % Borde del color principal
+        fill=blue!5,         % Relleno muy clarito
+        thick,
+        minimum size=7mm,    % Tamaño mínimo uniforme
+        inner sep=0pt,
+        font=\small\bfseries % Texto en negrita
+    },
+    % Estilo para nodos destacados (ej: para explicar un camino)
+    highlight/.style={
+        vertex,
+        draw=mainred,
+        fill=red!10,
+        text=mainred
+    },
+    % Estilo para las aristas (líneas)
+    edge/.style={
+        draw,
+        thick,
+        color=black!70       % Gris oscuro, no negro puro (más elegante)
+    },
+    % Estilo para aristas dirigidas (flechas)
+    directed/.style={
+        edge,
+        -{Latex[length=2.5mm]} % Flecha moderna
+    },
+    % Estilo para aristas destacadas (ej: camino más corto)
+    pathhighlight/.style={
+        edge,
+        draw=mainred,
+        line width=1.5pt
+    },
+    % Estilo para los pesos en las aristas
+    weight/.style={
+        font=\footnotesize,
+        fill=white,          % Fondo blanco para que no se cruce con la línea
+        inner sep=1pt,
+        text=black!80
+    }
+}
+
+% --- ENLACES Y REFERENCIAS ---
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% --- DEFINICIÓN DE COLORES ---
+\definecolor{mainblue}{RGB}{0, 70, 140}
+\definecolor{mainred}{RGB}{180, 0, 0}
+\definecolor{mainorange}{RGB}{200, 100, 0}
+\definecolor{maingreen}{RGB}{0, 120, 60}
+\definecolor{mainpurple}{RGB}{128, 0, 128}
+\definecolor{mainteal}{RGB}{0, 140, 120}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=mainblue,
+    urlcolor=mainblue,
+    citecolor=mainblue  
+}
+
+% --- CAJAS DE TEXTO (Entornos personalizados) ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% Configuración general para no repetir código
+\tcbset{
+    common/.style={
+        arc=2pt,
+        boxrule=1pt,
+        enhanced,
+        % No partir cajas entre páginas (si no caben, pasan a la siguiente)
+        breakable=false,
+        before upper={\phantomsection} % Para que los enlaces apunten bien
+    }
+}
+
+% 1. Definición (Azul)
+\newtcolorbox{De}[2]{
+  common,
+  colback=blue!5!white, colframe=mainblue,
+  fonttitle=\bfseries, title={Definición: #1},
+  label={#2}
+}
+
+% 2. Teorema (Rojo)
+\newtcolorbox{The}[2]{
+  common,
+  colback=red!5!white, colframe=mainred,
+  fonttitle=\bfseries, title={Teorema: #1},
+  label={#2}
+}
+
+% 3. Propiedad (Turquesa)
+\newtcolorbox{Pro}[2]{
+  common,
+  colback=teal!5!white, colframe=mainteal,
+  fonttitle=\bfseries, title={Propiedad: #1},
+  label={#2}
+}
+
+% 4. Lema (Naranja)
+\newtcolorbox{Le}[2]{
+  common,
+  colback=orange!5!white, colframe=mainorange,
+  fonttitle=\bfseries, title={Lema: #1},
+  label={#2}
+}
+
+% 5. Corolario (Morado)
+\newtcolorbox{Co}[2]{
+  common,
+  colback=mainpurple!5!white, colframe=mainpurple,
+  fonttitle=\bfseries, title={Corolario: #1},
+  label={#2}
+}
+
+% 6. Nota (Verde)
+\newtcolorbox{Rmk}[2]{
+  common,
+  colback=green!5!white, colframe=maingreen,
+  fonttitle=\bfseries, title={Nota: #1},
+  label={#2}
+}

@@ -1,0 +1,101 @@
+% !TEX root = ../main.tex
+
+\begin{figure}[htbp]
+  \centering
+  \vspace{0.75\baselineskip}
+  \vspace*{-0.75\baselineskip}
+  \begin{tikzpicture}[
+    scale=0.9,
+    every node/.style={transform shape},
+    v/.style={circle, draw, fill=blue!20, minimum size=7mm, inner sep=0pt, font=\small},
+    lab/.style={font=\small\bfseries, fill=white, draw=none, inner sep=0pt},
+    e/.style={draw, line width=0.45pt},
+    w/.style={font=\scriptsize}
+  ]
+
+    % ---- SIMPLE
+    \node[lab] (t1) at (0,2.25) {Simple};
+    \node[v] (sa) at (0,1.35) {a};
+    \node[v] (sb) at (1.5,1.10) {b};
+    \node[v] (sc) at (-1.25,0.75) {c};
+    \node[v] (sd) at (0,0.35) {d};
+    \draw[e] (sa) -- (sb);
+    \draw[e] (sa) -- (sd);
+    \draw[e] (sc) -- (sd);
+
+    % ---- MULTIGRAFO
+    \begin{scope}[xshift=5.2cm]
+      \node[lab] (t2) at (0,2.25) {Multigrafo};
+      \node[v] (ma) at (0,1.35) {a};
+      \node[v] (mb) at (1.5,1.10) {b};
+      \node[v] (mc) at (-1.25,0.75) {c};
+      \node[v] (md) at (0,0.35) {d};
+      \draw[e] (ma) -- (mb);
+      \draw[e] (ma) -- (md);
+      \draw[e] (mc) -- (md);
+      % aristas paralelas entre c y d
+      \draw[e, bend left=25] (mc) to (md);
+      \draw[e, bend right=25] (mc) to (md);
+    \end{scope}
+
+    % ---- PSEUDOGRAFO
+    \begin{scope}[xshift=10.4cm]
+      \node[lab] (t3) at (0,2.25) {Pseudografo};
+      \node[v] (pa) at (0,1.35) {a};
+      \node[v] (pb) at (1.5,1.10) {b};
+      \node[v] (pc) at (-1.25,0.75) {c};
+      \node[v] (pd) at (0,0.35) {d};
+      \draw[e] (pa) -- (pb);
+      \draw[e] (pa) -- (pd);
+      \draw[e] (pc) -- (pd);
+      % aristas paralelas y lazos
+      \draw[e, bend left=25] (pc) to (pd);
+      \draw[e, bend right=25] (pc) to (pd);
+      \draw[e] (pb) to[out=20,in=-20,looseness=8] (pb);
+      \draw[e] (pd) to[out=-120,in=-60,looseness=8] (pd);
+    \end{scope}
+
+    % ---- PONDERADO
+    \begin{scope}[yshift=-3.6cm]
+      \node[lab] (t4) at (0,2.25) {Ponderado};
+      \node[v] (wa) at (0,1.35) {a};
+      \node[v] (wb) at (1.5,1.10) {b};
+      \node[v] (wc) at (-1.25,0.75) {c};
+      \node[v] (wd) at (0,0.35) {d};
+      \draw[e] (wa) -- node[w, above] {5} (wb);
+      \draw[e] (wa) -- node[w, right] {10} (wd);
+      \draw[e] (wc) -- node[w, left] {4} (wa);
+      \draw[e] (wc) -- node[w, below left] {3} (wd);
+    \end{scope}
+
+    % ---- GRAFO DIRIGIDO
+    \begin{scope}[xshift=5.2cm, yshift=-3.6cm]
+      \node[lab] (t5) at (0,2.25) {Grafo dirigido};
+      \node[v] (da) at (0,1.35) {a};
+      \node[v] (db) at (1.5,1.10) {b};
+      \node[v] (dc) at (-1.25,0.75) {c};
+      \node[v] (dd) at (0,0.35) {d};
+      \draw[e, -{Stealth[length=2.2mm]}] (da) -- (db);
+      \draw[e, -{Stealth[length=2.2mm]}] (dc) -- (da);
+      \draw[e, -{Stealth[length=2.2mm]}] (dd) -- (da);
+      \draw[e, -{Stealth[length=2.2mm]}] (dc) -- (dd);
+    \end{scope}
+
+    % ---- MULTIGRAFO DIRIGIDO
+    \begin{scope}[xshift=10.4cm, yshift=-3.6cm]
+      \node[lab] (t6) at (0,2.25) {Multigrafo dirigido};
+      \node[v] (mda) at (0,1.35) {a};
+      \node[v] (mdb) at (1.5,1.10) {b};
+      \node[v] (mdc) at (-1.25,0.75) {c};
+      \node[v] (mdd) at (0,0.35) {d};
+      \draw[e, -{Stealth[length=2.2mm]}] (mda) -- (mdb);
+      \draw[e, -{Stealth[length=2.2mm]}] (mdc) -- (mda);
+      \draw[e, -{Stealth[length=2.2mm]}] (mdc) -- (mdd);
+      \draw[e, -{Stealth[length=2.2mm]}, bend left=20] (mda) to (mdd);
+      \draw[e, -{Stealth[length=2.2mm]}, bend right=20] (mda) to (mdd);
+    \end{scope}
+
+  \end{tikzpicture}
+  \caption{Tipos de grafos.}
+  \label{fig:tipos-grafos}
+\end{figure}

@@ -1,0 +1,191 @@
+% !TEX root = ../main.tex
+
+\section{Introducción}
+
+% =========================================================
+% 1. FUNDAMENTOS
+% =========================================================
+\subsection{Fundamentos y Métricas}
+
+\begin{De}{Grafo ($G$)}{def:grafo}
+Es una pareja de conjuntos $G=(V,A)$, donde:
+\begin{itemize}
+    \item $V$: Conjunto de \textbf{vértices} (o nodos).
+    \item $A$: Conjunto de \textbf{aristas} (parejas de vértices).
+\end{itemize}
+\end{De}
+
+\begin{De}{Grafo completo ($K_n$)}{def:completo}
+Un grafo de $n$ vértices se llama \textbf{completo} (y se denota $K_n$) si cada pareja de vértices está conectada por una arista.
+\end{De}
+
+\input{figuras/grafo_completo.tex}
+
+\begin{Rmk}{Terminología de Aristas}{nota:aristas}
+\begin{itemize}
+    \item \textbf{Aristas paralelas:} Múltiples aristas que unen los mismos dos vértices.
+    \item \textbf{Lazo (Loop):} Una arista que conecta un vértice consigo mismo.
+\end{itemize}
+\end{Rmk}
+
+\input{figuras/tipos_grafos.tex}
+
+\subsubsection{Propiedades Métricas}
+
+\begin{itemize}
+    \item \textbf{Orden ($|V|$):} Número total de vértices.
+    \item \textbf{Tamaño ($|A|$):} Número total de aristas.
+    \item \textbf{Grado ($gr(v)$):} Número de aristas incidentes en un vértice $v$ (¡Ojo! los lazos suman 2 al grado).
+\end{itemize}
+
+\begin{De}{Isomorfismo}{def:isomorfismo-rep}
+Dos representaciones se llaman \textbf{equivalentes} o \textbf{isomorfas} si corresponden al mismo conjunto de vértices y aristas.
+\end{De}
+
+Es decir, si existe una biyección entre sus vértices que preserva las aristas. 
+
+\begin{Le}{del Apretón de Manos}{lema:apreton}
+La suma de los grados de todos los vértices es igual al doble del número de aristas:
+\[ \sum_{v \in V} gr(v) = 2|A| \]
+\end{Le}
+
+\begin{Co}{Paridad de los Grados}{cor:paridad}
+El número de vértices de grado impar en cualquier grafo debe ser \textbf{par}. Si una secuencia de grados no cumple esto, el grafo no puede existir.
+\end{Co}
+
+% =========================================================
+% 2. CONECTIVIDAD
+% =========================================================
+\subsection{Conectividad y Tipos Especiales}
+
+\subsubsection{Caminos y recorridos}
+
+\begin{De}{Camino}{def:camino}
+Un \textbf{camino} es una sucesión de vértices $v_0,v_1,\dots,v_k$ tal que para todo $i=0,\dots,k-1$ existe una arista entre $v_i$ y $v_{i+1}$.
+\end{De}
+
+\begin{Rmk}{Camino simple}{nota:camino-simple}
+Se dice que el camino es \textbf{simple} si no se repite ningún vértice.
+\end{Rmk}
+\begin{De}{Recorrido}{def:recorrido}
+Un \textbf{recorrido} es un camino en el que no se repite ninguna arista.
+\end{De}
+
+\begin{De}{Circuito}{def:circuito}
+Un \textbf{circuito} es un recorrido cerrado, es decir, un recorrido cuyo vértice inicial coincide con el final ($v_0=v_k$).
+\end{De}
+
+\begin{De}{Ciclo}{def:ciclo}
+Un \textbf{ciclo} es un circuito en el que no se repite ningún vértice (salvo el primero/último).
+\end{De}
+
+\begin{De}{Grafo Conexo}{def:conexo}
+Un grafo es conexo si existe un camino entre cualquier par de vértices del grafo.
+\end{De}
+
+\begin{Pro}{Condición de Suficiencia}{prop:suficiencia}
+Para que un grafo de $N$ vértices sea conexo, el grado mínimo ($M$) de cada vértice debe cumplir:
+\[ M \ge \frac{N-1}{2} \]
+\end{Pro}
+
+\subsubsection{Grafos Bipartitos}
+
+\begin{De}{Grafo Bipartito}{def:bipartito}
+El grafo cuyos vértices se pueden dividir en 2 subconjuntos de tal manera que entre los vértices del mismo conjunto no hay aristas.
+\end{De}
+
+\input{figuras/grafo_bipartito.tex}
+
+\begin{De}{Grafo Bipartito Completo ($K_{n,m}$)}{def:bipartito-completo}
+Un \textbf{grafo bipartito completo}, denotado $K_{n,m}$, es un grafo $G=(V,A)$ tal que existe una partición $V=V_1 \cup V_2$ con $V_1 \cap V_2 = \emptyset$, $|V_1|=n$ y $|V_2|=m$, y además:
+\begin{itemize}
+    \item No hay aristas entre vértices del mismo conjunto: si $v,v' \in V_1$ entonces $(v,v') \notin A$, y si $u,u' \in V_2$ entonces $(u,u') \notin A$.
+    \item Todo vértice de $V_1$ está conectado con todo vértice de $V_2$: para todo $v \in V_1$ y $u \in V_2$, se tiene $(v,u) \in A$.
+\end{itemize}
+\end{De}
+
+\begin{Rmk}{Número de Aristas}{nota:n-aristas}
+En consecuencia, $K_{n,m}$ tiene exactamente $nm$ aristas.
+\end{Rmk}
+
+\subsubsection{Grafos Planos (Planares)}
+
+\begin{De}{Grafos Planares}{def:planares}
+El grafo se llama \textbf{planar} si se puede representar en el plano sin que las aristas se cruzen.
+\end{De}
+
+\begin{The}{Característica de Euler}{thm:euler}
+Para cualquier grafo plano conexo se cumple siempre:
+\[ V - A + C = 2 \]
+Donde $V$: vértices, $A$: aristas, $C$: caras (regiones).
+\end{The}
+
+\begin{Pro}{Desigualdades de Planariedad}{prop:planariedad}
+Si un grafo es plano simple y conexo con $V \ge 3$:
+\begin{enumerate}
+    \item $A \le 3V - 6$
+    \item Si no tiene triángulos (ej. bipartitos): $A \le 2V - 4$
+\end{enumerate}
+\end{Pro}
+
+\begin{The}{de Kuratowski}{thm:kuratowski}
+Un grafo es plano si y solo si NO contiene subgrafos homeomorfos a $K_5$ o $K_{3,3}$.
+\end{The}
+
+% =========================================================
+% 3. ÁRBOLES
+% =========================================================
+\subsection{Árboles}
+
+\begin{De}{Árbol}{def:arbol}
+\begin{itemize}
+    \item Es un grafo conexo que no contiene ciclos.
+    \item Es un grafo en el que para cada pareja de vértices existe un único recorrido que los une.
+\end{itemize}
+\end{De}
+
+\begin{Pro}{Propiedades Fundamentales de los Árboles}{prop:arboles}
+Sea $G$ un grafo con $n$ vértices. Las siguientes afirmaciones son equivalentes:
+\begin{enumerate}
+    \item $G$ es un árbol.
+    \item Existe un \textbf{único camino simple} entre cada par de vértices.
+    \item $G$ es conexo y cumple que $\mathbf{A = V - 1}$.
+    \item $G$ no tiene ciclos y $A = V - 1$.
+\end{enumerate}
+\end{Pro}
+
+\begin{The}{de Cayley}{thm:cayley}
+Existen $n^{n-2}$ árboles etiquetados distintos de $n$ vértices.
+\end{The}
+
+\begin{De}{Secuencia de Prüfer}{prufer}
+
+\end{De}
+
+
+\subsection{Algoritmos y Matrices}
+
+\begin{Pro}{Algoritmo de Havel-Hakimi}{prop:havel}
+Determina si existe un grafo simple con una secuencia de grados dada.
+\begin{enumerate}
+    \item Ordenar grados de mayor a menor.
+    \item Eliminar el primer grado $d$.
+    \item Restar 1 a los siguientes $d$ grados de la lista.
+    \item Repetir hasta obtener ceros (existe) o negativos (no existe).
+\end{enumerate}
+\end{Pro}
+
+\subsubsection{Representación Matricial}
+
+\begin{itemize}
+    \item \textbf{Matriz de Adyacencia ($A$):} $A_{ij} = 1$ si hay arista.
+    \begin{itemize}
+        \item $(A^n)_{ij}$ indica el número de caminos de longitud $n$ entre $i$ y $j$.
+    \end{itemize}
+    \item \textbf{Matriz de Incidencia ($M$):} Vértices $\times$ Aristas.
+\end{itemize}
+
+\begin{Pro}{Relación Fundamental}{prop:matrices}
+\[ M \cdot M^T = A + D \]
+Donde $D$ es la matriz diagonal de grados.
+\end{Pro}
